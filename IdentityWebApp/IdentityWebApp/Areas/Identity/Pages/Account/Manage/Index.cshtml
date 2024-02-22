@@ -1,0 +1,78 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+		<form id="profile-form" method="post" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Input.FirstName"></label>
+				<input asp-for="Input.FirstName" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label asp-for="Input.LastName"></label>
+				<input asp-for="Input.LastName" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label asp-for="Username"></label>
+				<input asp-for="Username" class="form-control" disabled />
+			</div>
+			<div class="form-group">
+				<label asp-for="Input.PhoneNumber"></label>
+				<input asp-for="Input.PhoneNumber" class="form-control" />
+				<span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label>Profile Image</label>
+				<input type="file" name="UploadPhoto" asp-for="Input.ProfileImage" class="form-control" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+				<img src="" />
+			</div>
+			<div class="form-group">
+				<label>Upload Document</label>
+				<input type="file" name="UploadDocument" asp-for="Input.UploadDocument" class="form-control" id="fileUpload" accept=".pdf" />
+				@if (Model.docupload != null && Model.docupload != "")
+				{
+				<button id="update-profile-button1" type="submit" asp-route-data="@Model.docupload" asp-page-handler="Way3" class="btn btn-primary">Download</button>
+				}
+			</div>
+			<button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+
+			@if (Model.filepath != null && Model.filepath != "")
+			{
+				<div class="container">
+					<h2>Image</h2>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>FileName</th>
+								<th>Image</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><label>@Model.filepath</label></td>
+								<td><img src="~/images/@Model.filepath" alt="" width="40px" height="40px" /></td>
+								<td>
+									@*<a href="@Url.Action("Delete","Home",new {imagedel=@Model.filepath })">Delete</a>*@
+									<button id="update-profile-button" type="submit" asp-route-data="@Model.filepath" asp-page-handler="Way2" class="btn btn-primary">Delete</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			}
+			
+		</form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
