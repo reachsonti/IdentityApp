@@ -22,5 +22,8 @@
 9) You can delete you account from Personal Data under Manage user accounts.
 10) Password can be updated from Password under Manage accounts. Kindly note, as there is no email functionality currently hence user can only change the password from Manage Accounts.
 11) Kindly leave Email and Two FactoreAuthentication.
+12) Visual studio 2019
+13) SQL SERVER 18.9.1
+14) Dot New Framework 5.0
    
       
